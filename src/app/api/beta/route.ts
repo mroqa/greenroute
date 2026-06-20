@@ -114,6 +114,9 @@ export async function POST(request: Request) {
       </html>
     `;
 
+    const fromEmail = process.env.FROM_EMAIL || "GreenRoute <noreply@greenrout.digital>";
+    const founderEmail = process.env.FOUNDER_EMAIL || "mr@mroqa.site";
+
     // Send welcome email to Subscriber
     const sendToSubscriber = fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -122,7 +125,7 @@ export async function POST(request: Request) {
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        from: "GreenRoute <noreply@greenrout.digital>",
+        from: fromEmail,
         to: [email],
         subject: "Welcome to the GreenRoute Beta!",
         html: subscriberHtml,
@@ -137,8 +140,8 @@ export async function POST(request: Request) {
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        from: "GreenRoute Notification <noreply@greenrout.digital>",
-        to: ["mr@mroqa.site"],
+        from: fromEmail,
+        to: [founderEmail],
         subject: `[New Beta Signup] ${email} (${role})`,
         html: founderHtml,
       }),
