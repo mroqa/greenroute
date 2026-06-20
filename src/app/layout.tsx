@@ -27,6 +27,9 @@ export const metadata: Metadata = {
   title: "GreenRoute — South Africa's First Carbon Intelligence Platform",
   description:
     "Track, compare, and reduce your commute's CO₂ — built for Cape Town. Auto-detect 9 transport modes, sync with the live Eskom grid, and turn every trip into a carbon-smart choice.",
+  icons: {
+    icon: "/logo.svg",
+  },
   keywords: [
     "GreenRoute",
     "carbon tracking",
