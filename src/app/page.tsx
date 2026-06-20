@@ -7,6 +7,7 @@ import { HowItWorksSection } from "@/components/sections/how-it-works";
 import { TransportModesSection } from "@/components/sections/transport-modes";
 import { FeaturesSection } from "@/components/sections/features";
 import { MarketSection } from "@/components/sections/market";
+import { FounderSection } from "@/components/sections/founder";
 import { CTASection } from "@/components/sections/cta";
 import { Footer } from "@/components/sections/footer";
 
@@ -23,6 +24,7 @@ export default function Home() {
         <TransportModesSection />
         <FeaturesSection />
         <MarketSection />
+        <FounderSection />
         <CTASection />
       </main>
       <Footer />

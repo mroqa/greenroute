@@ -10,20 +10,40 @@ export function CTASection() {
   const [email, setEmail] = useState("");
   const [role, setRole] = useState<"commuter" | "enterprise">("commuter");
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
       toast.error("Please enter a valid email address.");
       return;
     }
-    setSubmitted(true);
-    toast.success("You're on the list! We'll be in touch soon.", {
-      description:
-        role === "enterprise"
-          ? "Our team will reach out about Scope 3 reporting setup."
-          : "Beta access opens for Cape Town commuters first.",
-    });
+
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/beta", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, role }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Something went wrong.");
+      }
+
+      setSubmitted(true);
+      toast.success("You're on the list! We'll be in touch soon.", {
+        description:
+          role === "enterprise"
+            ? "Our team will reach out about Scope 3 reporting setup."
+            : "Beta access opens for Cape Town commuters first.",
+      });
+    } catch (err: any) {
+      toast.error(err.message || "Failed to submit. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -182,10 +202,11 @@ export function CTASection() {
 
                 <button
                   type="submit"
-                  className="group mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-lime-400 to-emerald-500 px-6 py-3.5 text-base font-bold text-emerald-950 shadow-lg transition-transform hover:scale-[1.02]"
+                  disabled={submitting}
+                  className="group mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-lime-400 to-emerald-500 px-6 py-3.5 text-base font-bold text-emerald-950 shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98] disabled:scale-100 disabled:opacity-50 disabled:pointer-events-none"
                 >
-                  Reserve my spot
-                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5" />
+                  {submitting ? "Reserving..." : "Reserve my spot"}
+                  {!submitting && <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5" />}
                 </button>
 
                 <p className="mt-4 text-center text-xs text-emerald-100/50">
