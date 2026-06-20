@@ -21,7 +21,7 @@ export function FounderSection() {
           <div className="overflow-hidden rounded-[2rem] border border-black/5 bg-white shadow-[0_12px_32px_-12px_rgba(15,23,16,0.06)] dark:border-white/10 dark:bg-emerald-900/10 dark:backdrop-blur-xl">
             <div className="flex flex-col md:flex-row">
               {/* Photo Container */}
-              <div className="relative aspect-[4/5] w-full shrink-0 bg-neutral-100 md:w-[320px] lg:w-[360px]">
+              <div className="relative aspect-[4/3] md:aspect-[4/5] w-full shrink-0 bg-neutral-100 md:w-[320px] lg:w-[360px]">
                 <Image
                   src="/assets/founder.png"
                   alt="Mohammed Roqa - Founder of GreenRoute"

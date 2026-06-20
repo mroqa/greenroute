@@ -28,6 +28,7 @@ import {
   StaggerGroup,
   StaggerItem,
 } from "@/components/site/primitives";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const MODES = [
   {
@@ -75,6 +76,8 @@ const MODES = [
 ];
 
 export function TransportModesSection() {
+  const isMobile = useIsMobile();
+
   return (
     <SectionShell
       id="modes"
@@ -151,10 +154,10 @@ export function TransportModesSection() {
                     <YAxis
                       type="category"
                       dataKey="mode"
-                      tick={{ fill: "oklch(0.22 0.04 160)", fontSize: 12, fontWeight: 600 }}
+                      tick={{ fill: "oklch(0.22 0.04 160)", fontSize: isMobile ? 10 : 12, fontWeight: 600 }}
                       axisLine={false}
                       tickLine={false}
-                      width={120}
+                      width={isMobile ? 85 : 120}
                     />
                     <Bar
                       dataKey="grams"

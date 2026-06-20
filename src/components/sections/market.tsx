@@ -120,8 +120,8 @@ export function MarketSection() {
                   dangerouslySetInnerHTML={{ __html: s.body }}
                 />
 
-                {/* Stats row */}
-                <div className="mt-6 grid grid-cols-2 gap-3">
+                 {/* Stats row */}
+                <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
                   {s.stats.map((st) => (
                     <div
                       key={st.label}
@@ -140,7 +140,7 @@ export function MarketSection() {
                 </div>
 
                 {/* Bullets */}
-                <ul className="mt-6 grid grid-cols-2 gap-2 border-t border-border/50 pt-5">
+                <ul className="mt-6 grid grid-cols-1 gap-2 border-t border-border/50 pt-5 sm:grid-cols-2">
                   {s.bullets.map((b) => (
                     <li
                       key={b}
